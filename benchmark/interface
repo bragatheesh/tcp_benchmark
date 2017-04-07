@@ -1,0 +1,40 @@
+const (
+        SOCKET_RAW uint8 = iota
+        SOCKET_IP
+        SOCKET_TCP
+        SOCKET_UDP
+      )
+
+type Endpoint struct {
+    Vrf      string
+        IPAdress string
+        L4Port   uint16
+        Zone     string
+}
+
+type PktIOSocket struct {
+    Type         uint8
+        Vrf          uint16
+        Port         uint16
+        Vlan         uint16
+        EthType      uint16
+        IPAddress    string
+        RemoteIP     string
+        L3Proto      uint16
+        L4Port       uint16
+        RemoteL4Port uint16
+}
+
+type PktIO interface {
+    CreateSocket(PktIOSocket) (uint32, error)
+        DeleteSocket(uint32) error
+        SetSockoptTCPMD5(uint32, string, string)
+        Connect(uint32, PktIOSocket, time.Duration) error
+        Listen(uint32) error
+        Accept(uint32) (uint32, error)
+        Read([]byte) (int, error)
+        ReadFrom([]byte) (int, Endpoint, error)
+        Write([]byte) (int, error)
+        WriteTo([]byte, Endpoint) (int, error)
+}
+

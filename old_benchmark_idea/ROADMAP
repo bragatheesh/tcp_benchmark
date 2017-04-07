@@ -1,0 +1,18 @@
+Two programs, server.c and client.c will perform the bench marking
+Both of these programs will need a bridge in order to effectively 
+test the progpagation delay through the various network layers.
+
+Server will send a packet to Client and then Client will simply echo the
+packet back. The total round trip time will be calculated. As of now, perform
+about 10-100 tests and calculate the average.
+
+TODO:
+-init bridge
+-client.c
+    -build a simple program using unix sockets to verify bridge works
+    -move over unix socket apis to Go apis
+-sever.c
+    -build a simple program using unix sockets to verify bridge works
+    -move over unix socket apis to Go apis
+
+Completed:
